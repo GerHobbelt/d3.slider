@@ -1,0 +1,19 @@
+{
+  "name": "d3.slider",
+  "main": "d3.slider.js",
+  "version": "0.1.0",
+  "homepage": "git://github.com/turban/d3.slider",
+  "description": "D3.js Slider",
+  "keywords": [
+    "d3"
+  ],
+  "authors": [
+    "turban"
+  ],
+  "ignore": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "d3": "3.4.8"
+  }
+}
