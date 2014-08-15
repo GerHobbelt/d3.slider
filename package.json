@@ -1,0 +1,25 @@
+{
+  "name": "d3.slider",
+  "version": "0.0.1",
+  "description": "D3.js Slider",
+  "main": "d3.slider.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BetterWorks/d3.slider.git"
+  },
+  "keywords": [
+    "d3"
+  ],
+  "author": "Bjorn Sandvik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BetterWorks/d3.slider/issues"
+  },
+  "homepage": "https://github.com/BetterWorks/d3.slider",
+  "dependencies": {
+    "d3": "3.4.11"
+  },
+}
