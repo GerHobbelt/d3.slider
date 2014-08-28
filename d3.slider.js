@@ -78,12 +78,11 @@ d3.slider = function module() {
       
       // Horizontal slider
       if (orientation === "horizontal") {
+        divRange = d3.select(this).append('div').classed("d3-slider-range", true);
 
         div.on("click", onClickHorizontal);
-        
-        if ( value.length == 2 ) {
-          divRange = d3.select(this).append('div').classed("d3-slider-range", true);
 
+        if ( value.length == 2 ) {
           handle1.style("left", formatPercent(scale(value[ 0 ])));
           divRange.style("left", formatPercent(scale(value[ 0 ])));
           drag.on("drag", onDragHorizontal);
@@ -95,18 +94,19 @@ d3.slider = function module() {
 
         } else {
           handle1.style("left", formatPercent(scale(value)));
+          divRange.style("width", formatPercent(scale(value)));
           drag.on("drag", onDragHorizontal);
         }
         
         sliderLength = parseInt(div.style("width"), 10);
 
       } else { // Vertical
+        divRange = d3.select(this).append('div').classed("d3-slider-range-vertical", true);
 
         div.on("click", onClickVertical);
         drag.on("drag", onDragVertical);
-        if ( value.length == 2 ) {
-          divRange = d3.select(this).append('div').classed("d3-slider-range-vertical", true);
 
+        if ( value.length == 2 ) {
           handle1.style("bottom", formatPercent(scale(value[ 0 ])));
           divRange.style("bottom", formatPercent(scale(value[ 0 ])));
           drag.on("drag", onDragVertical);
@@ -118,6 +118,8 @@ d3.slider = function module() {
 
         } else {
           handle1.style("bottom", formatPercent(scale(value)));
+          divRange.style("bottom", '0%');
+          divRange.style("top", formatPercent(1 - scale(value)));
           drag.on("drag", onDragVertical);
         }
         
@@ -214,16 +216,36 @@ d3.slider = function module() {
           if ( value[ 0 ] >= value[ 1 ] ) return;
           if ( active === 1 ) {
             
+            var rangeSide = null,
+                rangeOld = null,
+                rangeNew = null
+
             if (value.length === 2) {
-              (position === "left") ? divRange.style("left", newPos) : divRange.style("bottom", newPos);
+              rangeSide = position
+              rangeOld  = oldPos
+              rangeNew  = newPos
+            }
+            else if (position === "left") {
+              rangeSide = 'width';
+              rangeOld = oldPos;
+              rangeNew = newPos;
+            }
+            else if (position === "bottom") {
+              rangeSide = 'top';
+              rangeOld = (100 - parseFloat(oldPos)) + "%";
+              rangeNew = (100 - parseFloat(newPos)) + "%";
             }
 
             if (animate) {
               handle1.transition()
                   .styleTween(position, function() { return d3.interpolate(oldPos, newPos); })
                   .duration((typeof animate === "number") ? animate : 250);
+              divRange.transition()
+                .styleTween(rangeSide, function() { return d3.interpolate(rangeOld, rangeNew); })
+                .duration((typeof animate === "number") ? animate : 250);
             } else {
               handle1.style(position, newPos);
+              divRange.style(rangeSide, rangeNew);
             }
           } else {
             
