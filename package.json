@@ -1,6 +1,6 @@
 {
   "name": "d3.slider",
-  "version": "0.1.0",
+  "version": "0.1.0bw",
   "description": "D3.js Slider",
   "main": "d3.slider.js",
   "scripts": {
