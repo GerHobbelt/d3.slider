@@ -4,7 +4,9 @@
   "description": "D3.js Slider",
   "main": "d3.slider.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -23,8 +25,10 @@
   },
   "dependencies": {
     "d3": "~3.4.8",
-    "browserify": "~4.1.5",
-    "cssify": "~0.5.1"
+    "browserify": "~12.0.0",
+    "cssify": "~0.5.1",
+    "snyk": "^1.174.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "snyk": true
 }
